@@ -1,10 +1,8 @@
-import org.apache.poi.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Iterator;
@@ -12,16 +10,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import java.util.Scanner;
+import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC;
+import static org.apache.poi.ss.usermodel.Cell.CELL_TYPE_STRING;
+
 
 public class FileReadWriteWithData {
     public static void main(String[] args) {
-//        System.out.println("Enter filename with path :");
-//        Scanner sc = new Scanner(System.in);
-//        String filename = sc.nextLine();
-//
-//        FileReadWriteWithFile obj = new FileReadWriteWithFile();
-//        obj.readFile(filename);
         // Blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
 
@@ -29,7 +23,7 @@ public class FileReadWriteWithData {
         XSSFSheet sheet = workbook.createSheet("student details");
         Map<String, Object[]> store = new TreeMap<>();
 
-//         Adding value to map
+        // Adding value to map
         store.put("1", new Object[]{"ID", "Name", "Roll"});
         store.put("2", new Object[]{"1", "Jyoti", "Developer"});
         store.put("3", new Object[]{"2", "Gopal", "Architect"});
@@ -62,7 +56,7 @@ public class FileReadWriteWithData {
             System.out.println("Exception found " + ex );
         }
 
-        readFile("result.xlsx");
+        readFile("results.xlsx");
     }
 
     public static void readFile(String filename){
@@ -88,10 +82,11 @@ public class FileReadWriteWithData {
                     switch (cell.getCellType()) {
 
                         // Case 1
-                        case Cell.CELL_TYPE_NUMERIC -> System.out.print(cell.getNumericCellValue() + "-----------");
-
+                        case CELL_TYPE_NUMERIC : System.out.print(cell.getNumericCellValue() + "-----------");
+                            break;
                         // Case 2
-                        case Cell.CELL_TYPE_STRING -> System.out.print(cell.getStringCellValue() + "-----------");
+                        case CELL_TYPE_STRING : System.out.print(cell.getStringCellValue() + "-----------");
+                        break;
                     }
                 }
                 System.out.println();
@@ -103,7 +98,6 @@ public class FileReadWriteWithData {
             System.out.println("Exception caught : "+ ex);
         }
     }
-
 }
 
 
